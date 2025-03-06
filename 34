@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТЕСТ DDoS САЙТА</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #111;
+            color: #0f0;
+        }
+        .stats {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        h1 {
+            font-size: 40px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔥 ТЕСТ DDoS САЙТА 🔥</h1>
+    <p class="stats">💻 Посетителей всего: <span id="totalVisitors">0</span></p>
+    <p class="stats">🟢 Сейчас на сайте: <span id="onlineUsers">0</span></p>
+
+    <script>
+        // Увеличение общего количества посетителей
+        if (!localStorage.getItem('totalVisitors')) {
+            localStorage.setItem('totalVisitors', 0);
+        }
+        let totalVisitors = parseInt(localStorage.getItem('totalVisitors')) + 1;
+        localStorage.setItem('totalVisitors', totalVisitors);
+        document.getElementById('totalVisitors').textContent = totalVisitors;
+
+        // Подсчет активных пользователей
+        function updateOnlineUsers() {
+            let onlineUsers = sessionStorage.getItem('onlineUsers') || 0;
+            onlineUsers = parseInt(onlineUsers) + 1;
+            sessionStorage.setItem('onlineUsers', onlineUsers);
+            document.getElementById('onlineUsers').textContent = onlineUsers;
+        }
+
+        function decreaseOnlineUsers() {
+            let onlineUsers = parseInt(sessionStorage.getItem('onlineUsers')) || 1;
+            onlineUsers = Math.max(0, onlineUsers - 1);
+            sessionStorage.setItem('onlineUsers', onlineUsers);
+            document.getElementById('onlineUsers').textContent = onlineUsers;
+        }
+
+        updateOnlineUsers();
+        window.addEventListener("beforeunload", decreaseOnlineUsers);
+    </script>
+</body>
+</html>
