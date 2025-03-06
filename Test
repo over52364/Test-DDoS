@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ТЕСТ DDoS САЙТА</title>
+    <title>🔥 ТЕСТ DDoS САЙТА 🔥</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,7 +28,7 @@
     <p class="stats">🟢 Сейчас на сайте: <span id="onlineUsers">0</span></p>
 
     <script>
-        // Увеличение общего количества посетителей
+        // Обновляем общее число посетителей (сохраняется в localStorage)
         if (!localStorage.getItem('totalVisitors')) {
             localStorage.setItem('totalVisitors', 0);
         }
@@ -36,22 +36,25 @@
         localStorage.setItem('totalVisitors', totalVisitors);
         document.getElementById('totalVisitors').textContent = totalVisitors;
 
-        // Подсчет активных пользователей
+        // Функция для обновления числа пользователей онлайн
         function updateOnlineUsers() {
-            let onlineUsers = sessionStorage.getItem('onlineUsers') || 0;
-            onlineUsers = parseInt(onlineUsers) + 1;
-            sessionStorage.setItem('onlineUsers', onlineUsers);
+            let onlineUsers = parseInt(localStorage.getItem('onlineUsers')) || 0;
+            onlineUsers += 1;
+            localStorage.setItem('onlineUsers', onlineUsers);
             document.getElementById('onlineUsers').textContent = onlineUsers;
         }
 
+        // Функция для уменьшения числа пользователей при закрытии вкладки
         function decreaseOnlineUsers() {
-            let onlineUsers = parseInt(sessionStorage.getItem('onlineUsers')) || 1;
+            let onlineUsers = parseInt(localStorage.getItem('onlineUsers')) || 1;
             onlineUsers = Math.max(0, onlineUsers - 1);
-            sessionStorage.setItem('onlineUsers', onlineUsers);
-            document.getElementById('onlineUsers').textContent = onlineUsers;
+            localStorage.setItem('onlineUsers', onlineUsers);
         }
 
         updateOnlineUsers();
+        document.getElementById('onlineUsers').textContent = localStorage.getItem('onlineUsers');
+
+        // При закрытии вкладки уменьшаем счетчик онлайн пользователей
         window.addEventListener("beforeunload", decreaseOnlineUsers);
     </script>
 </body>
